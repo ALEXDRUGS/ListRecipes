@@ -1,4 +1,4 @@
-package com.app.recipes.Controllers;
+package com.app.recipe.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
