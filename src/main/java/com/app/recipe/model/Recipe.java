@@ -1,21 +1,17 @@
 package com.app.recipe.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.LinkedList;
 
 @Data
+@AllArgsConstructor
 
 public class Recipe {
-    private String nameRecipe;
+    private String name;
     private Integer preparingTime;
-    private LinkedList<Ingredient> ingredients;
-    private LinkedList<String> preparingSteps;
-
-    public Recipe(String nameRecipe, Integer preparingTime, LinkedList<Ingredient> ingredients, LinkedList<String> preparingSteps) {
-        this.nameRecipe = nameRecipe;
-        this.preparingTime = preparingTime;
-        this.ingredients = ingredients;
-        this.preparingSteps = preparingSteps;
-    }
+    private String measureUnit;
+//    private LinkedList<Ingredient> ingredients;
+//    private LinkedList<String> preparingSteps;
 }

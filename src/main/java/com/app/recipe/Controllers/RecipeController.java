@@ -18,7 +18,7 @@ public class RecipeController {
 
     @GetMapping("/recipe")
 
-    public Recipe getRecipe() {
+    public String getRecipe() {
         return ServiceImpl.getRecipe();
     }
 }
