@@ -13,5 +13,13 @@ public class Recipe {
     private Integer preparingTime;
     private String measureUnit;
     private LinkedList<Ingredient> ingredients;
-    private LinkedList<String> preparingSteps;
+    private LinkedList<Step> steps;
+
+    @Override
+    public String toString() {
+        return "Рецепт: " + name + ", время приготовления: " + preparingTime +
+                " " + measureUnit +
+                ", Ингредиенты: " + ingredients +
+                ". Способ приготовления: " + steps;
+    }
 }

@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class StepController {
     @PostMapping("/steps")
 
-    public void addIngredient(@RequestBody Step step) {
+    public void addStep(@RequestBody Step step) {
         Service.addStep(step);
     }
 
     @GetMapping("/steps")
 
-    public String getRecipe() {
+    public String getStep() {
         return Service.getStep();
     }
 }

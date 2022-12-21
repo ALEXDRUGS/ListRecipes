@@ -8,5 +8,9 @@ import lombok.Data;
 
 public class Step {
     private String step;
-    private String action;
+
+    @Override
+    public String toString() {
+        return "Шаг " + step;
+    }
 }

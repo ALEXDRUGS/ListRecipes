@@ -10,9 +10,9 @@ import java.util.*;
 public class Service {
     private static final Map<Integer, Recipe> RECIPE_MAP = new TreeMap<>();
     private static final LinkedList<Ingredient> INGREDIENT = new LinkedList<>();
-    private static final LinkedList<String> PREPARING_STEPS = new LinkedList<>();
+    private static final LinkedList<Step> STEPS = new LinkedList<>();
 
-    private static Integer id = 0;
+    private static Integer id = 1;
 
     public static void addIngredient(Ingredient ingredient) {
         INGREDIENT.add(id, ingredient);
@@ -23,11 +23,11 @@ public class Service {
     }
 
     public static void addStep(Step step) {
-        PREPARING_STEPS.add(id, step.toString());
+        STEPS.add(id, step);
     }
 
     public static String getStep() {
-        return PREPARING_STEPS.toString();
+        return STEPS.toString();
     }
     public static void addRecipe(Recipe recipe) {
         RECIPE_MAP.put(id++, recipe);

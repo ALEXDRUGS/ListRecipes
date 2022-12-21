@@ -19,7 +19,7 @@ public class IngredientController {
 
     @GetMapping("/ingredients")
 
-    public String getRecipe() {
+    public String getIngredient() {
         return Service.getIngredient();
     }
 }
