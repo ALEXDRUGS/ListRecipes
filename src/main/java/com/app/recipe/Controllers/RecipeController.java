@@ -1,9 +1,10 @@
 package com.app.recipe.Controllers;
 
 import com.app.recipe.model.Recipe;
-import com.app.recipe.service.impl.ServiceImpl;
+import com.app.recipe.service.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -12,13 +13,13 @@ public class RecipeController {
 
     @PostMapping("/recipe")
 
-    public void addRecipe(Recipe recipe) {
-        ServiceImpl.addRecipe(recipe);
+    public void addRecipe(@RequestBody Recipe recipe) {
+        Service.addRecipe(recipe);
     }
 
     @GetMapping("/recipe")
 
     public String getRecipe() {
-        return ServiceImpl.getRecipe();
+        return Service.getRecipe();
     }
 }

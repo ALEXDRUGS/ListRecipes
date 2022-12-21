@@ -12,6 +12,6 @@ public class Recipe {
     private String name;
     private Integer preparingTime;
     private String measureUnit;
-//    private LinkedList<Ingredient> ingredients;
-//    private LinkedList<String> preparingSteps;
+    private LinkedList<Ingredient> ingredients;
+    private LinkedList<String> preparingSteps;
 }
