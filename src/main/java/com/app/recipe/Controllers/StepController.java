@@ -1,7 +1,8 @@
 package com.app.recipe.Controllers;
 
 import com.app.recipe.model.Step;
-import com.app.recipe.service.Service;
+import com.app.recipe.service.RecipeService;
+import com.app.recipe.service.StepService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +14,12 @@ public class StepController {
     @PostMapping("/steps")
 
     public void addStep(@RequestBody Step step) {
-        Service.addStep(step);
+        StepService.addStep(step);
     }
 
-    @GetMapping("/steps")
+    @GetMapping("{id}")
 
-    public String getStep() {
-        return Service.getStep();
+    public Step getStep(Integer id) {
+        return StepService.getStep(id);
     }
 }

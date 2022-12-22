@@ -1,7 +1,8 @@
 package com.app.recipe.Controllers;
 
 import com.app.recipe.model.Ingredient;
-import com.app.recipe.service.Service;
+import com.app.recipe.service.IngredientService;
+import com.app.recipe.service.RecipeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,12 +15,12 @@ public class IngredientController {
     @PostMapping("/ingredients")
 
     public void addIngredient(@RequestBody Ingredient ingredient) {
-        Service.addIngredient(ingredient);
+        IngredientService.addIngredient(ingredient);
     }
 
-    @GetMapping("/ingredients")
+    @GetMapping("{id}")
 
-    public String getIngredient() {
-        return Service.getIngredient();
+    public Ingredient getIngredient(Integer id) {
+        return IngredientService.getIngredient(id);
     }
 }
