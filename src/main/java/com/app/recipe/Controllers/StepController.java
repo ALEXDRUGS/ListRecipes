@@ -11,12 +11,12 @@ public class StepController {
     @PostMapping
 
     public void addStep(@RequestBody Step step) {
-        StepService.addStep(step);
+        addStep(step);
     }
 
     @GetMapping("{id}")
 
     public Step getStep(Integer id) {
-        return StepService.getStep(id);
+        return getStep(id);
     }
 }

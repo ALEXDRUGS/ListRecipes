@@ -7,18 +7,14 @@ import java.util.LinkedList;
 
 @Service
 public class StepService {
-    private static final LinkedList<Step> STEPS = new LinkedList<>();
+    private LinkedList<Step> steps = new LinkedList<>();
     private static Integer id;
 
-    public static void addStep(Step step) {
-        STEPS.add(id, step);
+    public void addStep(Step step) {
+        steps.add(id, step);
     }
 
-    public static Step getStep(Integer id) {
-        return STEPS.get(id);
-    }
-
-    public static void setId(Integer id) {
-        StepService.id = id;
+    public Step getStep(Integer id) {
+        return steps.get(id);
     }
 }

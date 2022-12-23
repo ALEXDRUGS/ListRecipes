@@ -8,14 +8,14 @@ import java.util.TreeMap;
 @org.springframework.stereotype.Service
 
 public class RecipeService {
-    private static final Map<Integer, Recipe> RECIPE_MAP = new TreeMap<>();
+    private Map<Integer, Recipe> recipeMap = new TreeMap<>();
     public static Integer id = 1;
 
-    public static void addRecipe(Recipe recipe) {
-        RECIPE_MAP.put(id++, recipe);
+    public void addRecipe(Recipe recipe) {
+        recipeMap.put(id++, recipe);
     }
 
-    public static Recipe getRecipe(Integer id) {
-        return RECIPE_MAP.get(id);
+    public Recipe getRecipe(Integer id) {
+        return recipeMap.get(id);
     }
 }

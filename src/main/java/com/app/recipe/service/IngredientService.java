@@ -7,18 +7,14 @@ import java.util.LinkedList;
 
 @Service
 public class IngredientService {
-    private static final LinkedList<Ingredient> INGREDIENT = new LinkedList<>();
+    private LinkedList<Ingredient> ingredients = new LinkedList<>();
     private static Integer id;
 
-    public static void addIngredient(Ingredient ingredient) {
-        INGREDIENT.add(id, ingredient);
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(id, ingredient);
     }
 
-    public static Ingredient getIngredient(Integer id) {
-        return INGREDIENT.get(id);
-    }
-
-    public static void setId(Integer id) {
-        IngredientService.id = id;
+    public Ingredient getIngredient(Integer id) {
+        return ingredients.get(id);
     }
 }
