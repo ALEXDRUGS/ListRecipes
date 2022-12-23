@@ -18,4 +18,12 @@ public class RecipeService {
     public Recipe getRecipe(Integer id) {
         return recipeMap.get(id);
     }
+
+    public Recipe updateRecipe(Integer id, Recipe recipe) {
+       return recipeMap.replace(id, recipe);
+    }
+
+    public void deleteRecipe(Integer id) {
+        recipeMap.remove(id);
+    }
 }

@@ -25,4 +25,14 @@ public class RecipeController {
     public Recipe getRecipe(@PathVariable Integer id) {
         return recipeService.getRecipe(id);
     }
+
+    @PutMapping
+    public Recipe updateRecipe(@RequestBody Recipe recipe) {
+        return recipeService.updateRecipe(recipe.getId(), recipe);
+    }
+
+    @DeleteMapping(value = "/recipe/{id}")
+    public void deleteRecipe(@PathVariable Integer id) {
+        recipeService.deleteRecipe(id);
+    }
 }

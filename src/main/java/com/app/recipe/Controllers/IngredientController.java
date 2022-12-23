@@ -1,6 +1,7 @@
 package com.app.recipe.Controllers;
 
 import com.app.recipe.model.Ingredient;
+import com.app.recipe.model.Recipe;
 import com.app.recipe.service.IngredientService;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,5 +25,14 @@ public class IngredientController {
 
     public Ingredient getIngredient(@PathVariable Integer id) {
         return ingredientService.getIngredient(id);
+    }
+    @PutMapping
+    public Ingredient updateIngredient(@RequestBody Ingredient ingredient) {
+        return ingredientService.updateIngredient(ingredient.getId(), ingredient);
+    }
+
+    @DeleteMapping(value = "/ingredients/{id}")
+    public void deleteIngredient(@PathVariable Integer id) {
+        ingredientService.deleteIngredient(id);
     }
 }

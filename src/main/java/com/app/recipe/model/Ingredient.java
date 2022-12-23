@@ -10,6 +10,7 @@ public class Ingredient {
     private String nameIngredient;
     private Integer count;
     private String measureUnit;
+    private Integer id;
 
     @Override
     public String toString() {

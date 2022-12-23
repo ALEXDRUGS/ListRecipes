@@ -14,6 +14,7 @@ public class Recipe {
     private String measureUnit;
     private LinkedList<Ingredient> ingredients;
     private LinkedList<Step> steps;
+    private Integer id;
 
 
     @Override
