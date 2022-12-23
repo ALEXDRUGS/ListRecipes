@@ -15,6 +15,7 @@ public class Recipe {
     private LinkedList<Ingredient> ingredients;
     private LinkedList<Step> steps;
 
+
     @Override
     public String toString() {
         return "Рецепт: " + name + ", время приготовления: " + preparingTime +

@@ -1,4 +1,4 @@
-GET http://localhost:8080/recipe
+GET http://localhost:8080/recipe?id=1
 ###
 //GET http://localhost:8080/ingredients
 ###

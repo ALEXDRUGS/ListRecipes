@@ -2,17 +2,13 @@ package com.app.recipe.Controllers;
 
 import com.app.recipe.model.Ingredient;
 import com.app.recipe.service.IngredientService;
-import com.app.recipe.service.RecipeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-
+@RequestMapping("/ingredients")
 
 public class IngredientController {
-    @PostMapping("/ingredients")
+    @PostMapping
 
     public void addIngredient(@RequestBody Ingredient ingredient) {
         IngredientService.addIngredient(ingredient);

@@ -17,4 +17,8 @@ public class IngredientService {
     public static Ingredient getIngredient(Integer id) {
         return INGREDIENT.get(id);
     }
+
+    public static void setId(Integer id) {
+        IngredientService.id = id;
+    }
 }

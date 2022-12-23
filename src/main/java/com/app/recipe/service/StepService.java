@@ -17,4 +17,8 @@ public class StepService {
     public static Step getStep(Integer id) {
         return STEPS.get(id);
     }
+
+    public static void setId(Integer id) {
+        StepService.id = id;
+    }
 }
