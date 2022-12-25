@@ -1,4 +1,4 @@
-package com.app.recipe.Controllers;
+package com.app.recipe.controllers;
 
 import com.app.recipe.model.Step;
 import com.app.recipe.service.StepService;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/steps")
 
 public class StepController {
-    private StepService stepService;
+    private final StepService stepService;
 
     public StepController(StepService stepService) {
         this.stepService = stepService;
@@ -20,7 +20,7 @@ public class StepController {
         stepService.addStep(step);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
 
     public Step getStep(@PathVariable Integer id) {
         return stepService.getStep(id);

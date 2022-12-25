@@ -8,7 +8,7 @@ import java.util.LinkedList;
 @Service
 public class StepService {
     private LinkedList<Step> steps = new LinkedList<>();
-    private static Integer id;
+    private Integer id;
 
     public void addStep(Step step) {
         steps.add(id, step);

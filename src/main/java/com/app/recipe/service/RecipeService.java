@@ -8,8 +8,8 @@ import java.util.TreeMap;
 @org.springframework.stereotype.Service
 
 public class RecipeService {
-    private Map<Integer, Recipe> recipeMap = new TreeMap<>();
-    public static Integer id = 1;
+    private final Map<Integer, Recipe> recipeMap = new TreeMap<>();
+    public static Integer id = 0;
 
     public void addRecipe(Recipe recipe) {
         recipeMap.put(id++, recipe);
@@ -20,7 +20,10 @@ public class RecipeService {
     }
 
     public Recipe updateRecipe(Integer id, Recipe recipe) {
-       return recipeMap.replace(id, recipe);
+        if (recipeMap.containsKey(id)) {
+            recipeMap.replace(id, recipe);
+        }
+        return recipe;
     }
 
     public void deleteRecipe(Integer id) {
