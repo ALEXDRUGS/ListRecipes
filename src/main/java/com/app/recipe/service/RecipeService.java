@@ -11,8 +11,9 @@ public class RecipeService {
     private final Map<Integer, Recipe> recipeMap = new TreeMap<>();
     public static Integer id = 0;
 
-    public void addRecipe(Recipe recipe) {
+    public Recipe addRecipe(Recipe recipe) {
         recipeMap.put(id++, recipe);
+        return recipe;
     }
 
     public Recipe getRecipe(Integer id) {
