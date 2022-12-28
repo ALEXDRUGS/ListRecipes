@@ -1,7 +1,6 @@
 package com.app.recipe.controllers;
 
 import com.app.recipe.model.Ingredient;
-import com.app.recipe.model.Recipe;
 import com.app.recipe.service.IngredientService;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
