@@ -2,6 +2,8 @@ package com.app.recipe.controllers;
 
 import com.app.recipe.model.Recipe;
 import com.app.recipe.service.RecipeService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +18,11 @@ public class RecipeController {
 
     @PostMapping
 
-    public void addRecipe(@RequestBody Recipe recipe) {
-        recipeService.addRecipe(recipe);
+    public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
+        if (StringUtils.isBlank(recipe.getName())) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(recipeService.addRecipe(recipe));
     }
 
     @GetMapping("/{id}")
