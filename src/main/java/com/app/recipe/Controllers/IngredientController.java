@@ -1,7 +1,11 @@
 package com.app.recipe.controllers;
 
 import com.app.recipe.model.Ingredient;
+import com.app.recipe.model.Recipe;
 import com.app.recipe.service.IngredientService;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,8 +20,14 @@ public class IngredientController {
 
     @PostMapping
 
-    public void addIngredient(@RequestBody Ingredient ingredient) {
-        ingredientService.addIngredient(ingredient);
+    public ResponseEntity<Ingredient> addIngredient(@RequestBody @NotNull Ingredient ingredient) {
+        ResponseEntity<Ingredient> result;
+        if (StringUtils.isBlank(ingredient.getNameIngredient())) {
+            result = ResponseEntity.badRequest().build();
+        } else {
+            result = ResponseEntity.ok(ingredientService.addIngredient(ingredient));
+        }
+        return result;
     }
 
     @GetMapping("/{id}")
@@ -25,6 +35,7 @@ public class IngredientController {
     public Ingredient getIngredient(@PathVariable("id") Integer id) {
         return ingredientService.getIngredient(id);
     }
+
     @PutMapping("/{id}")
     public Ingredient updateIngredient(@PathVariable Integer id, @RequestBody Ingredient ingredient) {
         return ingredientService.updateIngredient(id, ingredient);
