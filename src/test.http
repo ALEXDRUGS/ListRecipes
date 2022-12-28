@@ -2,7 +2,7 @@ PUT http://localhost:8080/recipe
 Content-Type: application/json
 
 ###
-//GET http://localhost:8080/ingredients
+GET http://localhost:8080/ingredients/0
 ###
 POST http://localhost:8080/recipe
 Content-Type: application/json

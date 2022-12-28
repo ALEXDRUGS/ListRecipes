@@ -3,7 +3,10 @@ package com.app.recipe.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -11,8 +14,8 @@ public class Recipe {
     private String name;
     private Integer preparingTime;
     private String measureUnit;
-    private LinkedList<Ingredient> ingredients;
-    private LinkedList<Step> steps;
+    private Map<Integer, Ingredient> ingredients;
+    private LinkedList<String> steps;
 
     @Override
     public String toString() {
