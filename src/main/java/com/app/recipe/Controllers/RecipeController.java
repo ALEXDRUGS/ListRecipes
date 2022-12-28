@@ -2,7 +2,9 @@ package com.app.recipe.controllers;
 
 import com.app.recipe.model.Recipe;
 import com.app.recipe.service.RecipeService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +18,17 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    @Operation(description = "Recipe not has been added")
     @PostMapping
 
-    public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> addRecipe(@RequestBody @NotNull Recipe recipe) {
+        ResponseEntity<Recipe> result;
         if (StringUtils.isBlank(recipe.getName())) {
-            return ResponseEntity.badRequest().build();
+            result = ResponseEntity.badRequest().build();
+        } else {
+            result = ResponseEntity.ok(recipeService.addRecipe(recipe));
         }
-        return ResponseEntity.ok(recipeService.addRecipe(recipe));
+        return result;
     }
 
     @GetMapping("/{id}")
