@@ -8,10 +8,10 @@ import java.util.*;
 @Service
 public class IngredientService {
     private final Map<Integer, Ingredient> ingredients = new TreeMap<>();
-    private static Integer id = 0;
+    private Integer id = 0;
 
     public Ingredient addIngredient(Ingredient ingredient) {
-        ingredients.putIfAbsent(id++, ingredient);
+        ingredients.put(id++, ingredient);
         return ingredient;
     }
 
