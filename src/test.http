@@ -1,24 +1,34 @@
-PUT http://localhost:8080/recipe
+PUT http://localhost:8080/recipe/0
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/ingredients/0
+PUT http://localhost:8080/ingredients/0
+Content-Type: application/json
+
+{
+  "nameIngredient": "Консервированная фасоль",
+  "count": 400,
+  "measureUnit": "г"
+}
+
+###
+GET http://localhost:8080/ingredients/1
 
 ###
 POST http://localhost:8080/ingredients
 Content-Type: application/json
 
 {
-  "nameIngredient": "Творог",
-  "count": 350,
-  "measureUnit": "г"
+  "nameIngredient": "Специи",
+  "count": 1,
+  "measureUnit": "щепотка"
 }
 
 ###
 GET http://localhost:8080/recipe/0
 
 ###
-POST http://localhost:8080/ingredients
+POST http://localhost:8080/recipe
 Content-Type: application/json
 
 {
