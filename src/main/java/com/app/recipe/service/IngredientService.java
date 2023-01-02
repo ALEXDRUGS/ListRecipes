@@ -50,7 +50,7 @@ public class IngredientService {
             String json = new ObjectMapper().writeValueAsString(ingredients);
             fileService.saveToIngFile(json);
         } catch (JsonProcessingException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -60,7 +60,7 @@ public class IngredientService {
             ingredients = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
             });
         } catch (JsonProcessingException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 }

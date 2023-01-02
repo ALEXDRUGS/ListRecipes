@@ -1,1 +1,173 @@
-{"0":{"name":"Чечевичный суп с мятой","preparingTime":30,"measureUnit":"мин.","ingredients":[{"nameIngredient":"Красная чечевица","count":150,"measureUnit":"г."},{"nameIngredient":"Репчатый лук","count":1,"measureUnit":"головка"},{"nameIngredient":"Морковь","count":1,"measureUnit":"шт."},{"nameIngredient":"Подсолнечное масло","count":30,"measureUnit":"мл."},{"nameIngredient":"Сливочное масло","count":15,"measureUnit":"г"},{"nameIngredient":"Пшеничная мука","count":30,"measureUnit":"г"},{"nameIngredient":"Сливки 33%","count":50,"measureUnit":"мл."},{"nameIngredient":"Специи","count":1,"measureUnit":"щепотка"},{"nameIngredient":"Лимон","count":1,"measureUnit":"шт."},{"nameIngredient":"Мята","count":1,"measureUnit":"щепотка"}],"steps":["В небольшую кастрюлю налить литр воды и засыпать промытую чечевицу. Поставить кастрюлю на среднийогонь","Натереть небольшую морковь на крупной терке, мелко нарезать лук. Как только чечевица начнет кипеть,надо убавить огонь, а затем долить еще 200 мл воды или бульона. Варить еще десять минут","Разогреть широкую плоскую сковороду, добавить туда подсолнечное и сливочное масло. Обжарить лук иморковь.","Добавить обжаренные овощи в кастрюлю, влить сливки. Взбить суп ручным блендером, чтобы онпревратился в густое пюре. Суп можно подавать к столу."]},"1":{"name":"Салат с креветками и кунжутом","preparingTime":20,"measureUnit":"мин.","ingredients":[{"nameIngredient":"Помидоры","count":3,"measureUnit":"шт."},{"nameIngredient":"Королевские креветки","count":300,"measureUnit":"г"},{"nameIngredient":"Зеленый салат","count":1,"measureUnit":"пучок"},{"nameIngredient":"Огурцы","count":2,"measureUnit":"шт."},{"nameIngredient":"Специи","count":1,"measureUnit":"щепотка"},{"nameIngredient":"Майонез","count":1,"measureUnit":"ст. л."},{"nameIngredient":"Кунжутные семечки","count":3,"measureUnit":"ст. л."}],"steps":["Порезать овощи крупно, салат порвать на куски.","Довести до кипения сильно соленую воду и добавить креветки. После кипения варить 5 минут.","Очистить креветки от панциря.","Смешать овощи и креветки.","Посыпать кунжутными семечками и заправить майонезом."]},"2":{"name":"Салат из красной фасоли с творожным сыром, красным луком и сезонным салатом","preparingTime":7,"measureUnit":"мин.","ingredients":[{"nameIngredient":"Специи","count":1,"measureUnit":"щепотка"},{"nameIngredient":"Консервированная фасоль","count":400,"measureUnit":"г"},{"nameIngredient":"Лимон","count":1,"measureUnit":"шт."},{"nameIngredient":"Чеснок","count":2,"measureUnit":"зубчик"},{"nameIngredient":"Оливковое масло","count":50,"measureUnit":"мл"},{"nameIngredient":"Рукола","count":100,"measureUnit":"г"},{"nameIngredient":"Творожный сыр","count":200,"measureUnit":"г"},{"nameIngredient":"Чеснок","count":50,"measureUnit":"г"}],"steps":["Открыть две банки красной фасоли в собственном соку, слить сок и промыть фасоль холодной водой.","Готовую фасоль смешать с мелко нарубленным красным луком, зеленью, давленым чесноком, оливковыммаслом, лимонным соком и творожным сыром.","Посолить, поперчить, дать продуктам две минуты притереться друг к другу и подавать к столу."]},"3":{"name":"rts","preparingTime":30,"measureUnit":"gh","ingredients":null,"steps":null}}
+{
+  "0": {
+    "name": "Чечевичный суп с мятой",
+    "preparingTime": 30,
+    "measureUnit": "мин.",
+    "ingredients": [
+      {
+        "nameIngredient": "Красная чечевица",
+        "count": 150,
+        "measureUnit": "г."
+      },
+      {
+        "nameIngredient": "Репчатый лук",
+        "count": 1,
+        "measureUnit": "головка"
+      },
+      {
+        "nameIngredient": "Морковь",
+        "count": 1,
+        "measureUnit": "шт."
+      },
+      {
+        "nameIngredient": "Подсолнечное масло",
+        "count": 30,
+        "measureUnit": "мл."
+      },
+      {
+        "nameIngredient": "Сливочное масло",
+        "count": 15,
+        "measureUnit": "г"
+      },
+      {
+        "nameIngredient": "Пшеничная мука",
+        "count": 30,
+        "measureUnit": "г"
+      },
+      {
+        "nameIngredient": "Сливки 33%",
+        "count": 50,
+        "measureUnit": "мл."
+      },
+      {
+        "nameIngredient": "Специи",
+        "count": 1,
+        "measureUnit": "щепотка"
+      },
+      {
+        "nameIngredient": "Лимон",
+        "count": 1,
+        "measureUnit": "шт."
+      },
+      {
+        "nameIngredient": "Мята",
+        "count": 1,
+        "measureUnit": "щепотка"
+      }
+    ],
+    "steps": [
+      "В небольшую кастрюлю налить литр воды и засыпать промытую чечевицу. Поставить кастрюлю на среднийогонь",
+      "Натереть небольшую морковь на крупной терке, мелко нарезать лук. Как только чечевица начнет кипеть,надо убавить огонь, а затем долить еще 200 мл воды или бульона. Варить еще десять минут",
+      "Разогреть широкую плоскую сковороду, добавить туда подсолнечное и сливочное масло. Обжарить лук иморковь.",
+      "Добавить обжаренные овощи в кастрюлю, влить сливки. Взбить суп ручным блендером, чтобы онпревратился в густое пюре. Суп можно подавать к столу."
+    ]
+  },
+  "1": {
+    "name": "Салат с креветками и кунжутом",
+    "preparingTime": 20,
+    "measureUnit": "мин.",
+    "ingredients": [
+      {
+        "nameIngredient": "Помидоры",
+        "count": 3,
+        "measureUnit": "шт."
+      },
+      {
+        "nameIngredient": "Королевские креветки",
+        "count": 300,
+        "measureUnit": "г"
+      },
+      {
+        "nameIngredient": "Зеленый салат",
+        "count": 1,
+        "measureUnit": "пучок"
+      },
+      {
+        "nameIngredient": "Огурцы",
+        "count": 2,
+        "measureUnit": "шт."
+      },
+      {
+        "nameIngredient": "Специи",
+        "count": 1,
+        "measureUnit": "щепотка"
+      },
+      {
+        "nameIngredient": "Майонез",
+        "count": 1,
+        "measureUnit": "ст. л."
+      },
+      {
+        "nameIngredient": "Кунжутные семечки",
+        "count": 3,
+        "measureUnit": "ст. л."
+      }
+    ],
+    "steps": [
+      "Порезать овощи крупно, салат порвать на куски.",
+      "Довести до кипения сильно соленую воду и добавить креветки. После кипения варить 5 минут.",
+      "Очистить креветки от панциря.",
+      "Смешать овощи и креветки.",
+      "Посыпать кунжутными семечками и заправить майонезом."
+    ]
+  },
+  "2": {
+    "name": "Салат из красной фасоли с творожным сыром, красным луком и сезонным салатом",
+    "preparingTime": 7,
+    "measureUnit": "мин.",
+    "ingredients": [
+      {
+        "nameIngredient": "Специи",
+        "count": 1,
+        "measureUnit": "щепотка"
+      },
+      {
+        "nameIngredient": "Консервированная фасоль",
+        "count": 400,
+        "measureUnit": "г"
+      },
+      {
+        "nameIngredient": "Лимон",
+        "count": 1,
+        "measureUnit": "шт."
+      },
+      {
+        "nameIngredient": "Чеснок",
+        "count": 2,
+        "measureUnit": "зубчик"
+      },
+      {
+        "nameIngredient": "Оливковое масло",
+        "count": 50,
+        "measureUnit": "мл"
+      },
+      {
+        "nameIngredient": "Рукола",
+        "count": 100,
+        "measureUnit": "г"
+      },
+      {
+        "nameIngredient": "Творожный сыр",
+        "count": 200,
+        "measureUnit": "г"
+      },
+      {
+        "nameIngredient": "Чеснок",
+        "count": 50,
+        "measureUnit": "г"
+      }
+    ],
+    "steps": [
+      "Открыть две банки красной фасоли в собственном соку, слить сок и промыть фасоль холодной водой.",
+      "Готовую фасоль смешать с мелко нарубленным красным луком, зеленью, давленым чесноком, оливковыммаслом, лимонным соком и творожным сыром.",
+      "Посолить, поперчить, дать продуктам две минуты притереться друг к другу и подавать к столу."
+    ]
+  },
+  "3": {
+    "name": "rts",
+    "preparingTime": 30,
+    "measureUnit": "gh",
+    "ingredients": null,
+    "steps": null
+  }
+}

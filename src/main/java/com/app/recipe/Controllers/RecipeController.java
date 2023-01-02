@@ -18,7 +18,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @Operation(description = "Recipe don't has been added")
+    @Operation(description = "Recipe has been added")
     @PostMapping
 
     public ResponseEntity<Recipe> addRecipe(@RequestBody @NotNull Recipe recipe) {

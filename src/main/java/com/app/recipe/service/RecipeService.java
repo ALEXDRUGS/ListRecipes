@@ -52,7 +52,7 @@ public class RecipeService {
             String json = new ObjectMapper().writeValueAsString(recipeMap);
             fileService.saveToRecipeFile(json);
         } catch (JsonProcessingException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -62,7 +62,7 @@ public class RecipeService {
             recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
             });
         } catch (JsonProcessingException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 }

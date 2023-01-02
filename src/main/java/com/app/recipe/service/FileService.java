@@ -25,7 +25,7 @@ public class FileService {
             cleanRecipeDataFile();
             Files.writeString(Path.of(recipeFilePath, recipeFileName), json);
         } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -34,7 +34,7 @@ public class FileService {
             cleanIngDataFile();
             Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
         } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -42,7 +42,7 @@ public class FileService {
         try {
             return Files.readString(Path.of(recipeFilePath, recipeFileName));
         } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
             throw new RuntimeException();
         }
     }
@@ -51,26 +51,26 @@ public class FileService {
         try {
             return Files.readString(Path.of(ingredientFilePath, ingredientFileName));
         } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
             throw new RuntimeException();
         }
     }
 
-    private void cleanRecipeDataFile() {
+    public void cleanRecipeDataFile() {
         try {
             Files.deleteIfExists(Path.of(recipeFilePath, recipeFileName));
             Files.createFile(Path.of(recipeFilePath, recipeFileName));
         } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
-    private void cleanIngDataFile() {
+    public void cleanIngDataFile() {
         try {
             Files.deleteIfExists(Path.of(ingredientFilePath, ingredientFileName));
             Files.createFile(Path.of(ingredientFilePath, ingredientFileName));
         } catch (IOException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
