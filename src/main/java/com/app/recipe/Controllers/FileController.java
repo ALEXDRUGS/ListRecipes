@@ -1,17 +1,16 @@
 package com.app.recipe.controllers;
 
 import com.app.recipe.service.FileService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 @RestController
 @RequestMapping("/files")
@@ -28,7 +27,7 @@ public class FileController {
         if (file.exists()) {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
             return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .contentType(MediaType.APPLICATION_JSON)
                     .contentLength(file.length())
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Recipes.json\"")
                     .body(resource);
@@ -37,18 +36,44 @@ public class FileController {
         }
     }
 
-    @GetMapping("/export/ingredient")
+    @GetMapping("/export/ingredients")
     public ResponseEntity<InputStreamResource> downloadIngDataFile() throws FileNotFoundException {
         File file = fileService.getIngDataFile();
         if (file.exists()) {
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
             return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .contentType(MediaType.APPLICATION_JSON)
                     .contentLength(file.length())
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"Ingredients.json\"")
                     .body(resource);
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @PostMapping(value = "/import/recipe", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> uploadRecipeDataFile(@RequestParam MultipartFile multipartFile) {
+        fileService.cleanRecipeDataFile();
+        File file = fileService.getRecipeDataFile();
+        try (FileOutputStream fos = new FileOutputStream(file)){
+            IOUtils.copy(multipartFile.getInputStream(), fos);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+
+    @PostMapping(value = "/import/ingredients", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> uploadIngDataFile(@RequestParam MultipartFile multipartFile) {
+        fileService.cleanIngDataFile();
+        File file = fileService.getIngDataFile();
+        try (FileOutputStream fos = new FileOutputStream(file)){
+            IOUtils.copy(multipartFile.getInputStream(), fos);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }
