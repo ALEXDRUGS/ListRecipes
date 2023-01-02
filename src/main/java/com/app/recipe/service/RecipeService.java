@@ -4,7 +4,6 @@ import com.app.recipe.model.Recipe;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,6 @@ public class RecipeService {
     private final FileService fileService;
     private Map<Integer, Recipe> recipeMap = new HashMap<>();
     public Integer id = 0;
-
     public RecipeService(FileService fileService) {
         this.fileService = fileService;
     }
@@ -60,7 +58,7 @@ public class RecipeService {
 
     private void readFromFile() {
         try {
-            String json = fileService.readFromFile();
+            String json = fileService.readFromRecipeFile();
             recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
             });
         } catch (JsonProcessingException e) {

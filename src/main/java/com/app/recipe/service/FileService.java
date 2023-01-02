@@ -3,6 +3,7 @@ package com.app.recipe.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +13,6 @@ public class FileService {
 
     @Value("${path.to.recipe.file}")
     private String recipeFilePath;
-
     @Value("${name.of.recipe.file}")
     private String recipeFileName;
     @Value("${path.to.ingredient.file}")
@@ -22,7 +22,7 @@ public class FileService {
 
     public void saveToRecipeFile(String json) {
         try {
-            cleanDataFile();
+            cleanRecipeDataFile();
             Files.writeString(Path.of(recipeFilePath, recipeFileName), json);
         } catch (IOException e) {
             e.getStackTrace();
@@ -38,7 +38,7 @@ public class FileService {
         }
     }
 
-    public String readFromFile() {
+    public String readFromRecipeFile() {
         try {
             return Files.readString(Path.of(recipeFilePath, recipeFileName));
         } catch (IOException e) {
@@ -56,7 +56,7 @@ public class FileService {
         }
     }
 
-    private void cleanDataFile() {
+    private void cleanRecipeDataFile() {
         try {
             Files.deleteIfExists(Path.of(recipeFilePath, recipeFileName));
             Files.createFile(Path.of(recipeFilePath, recipeFileName));
@@ -72,5 +72,13 @@ public class FileService {
         } catch (IOException e) {
             e.getStackTrace();
         }
+    }
+
+    public File getRecipeDataFile() {
+        return new File(recipeFilePath + "/" + recipeFileName);
+    }
+
+    public File getIngDataFile() {
+        return new File(ingredientFilePath + "/" + ingredientFileName);
     }
 }

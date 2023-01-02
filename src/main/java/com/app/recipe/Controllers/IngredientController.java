@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ingredients")
-
 public class IngredientController {
     private final IngredientService ingredientService;
 
@@ -18,7 +17,6 @@ public class IngredientController {
     }
 
     @PostMapping
-
     public ResponseEntity<Ingredient> addIngredient(@RequestBody @NotNull Ingredient ingredient) {
         ResponseEntity<Ingredient> result;
         if (StringUtils.isBlank(ingredient.getNameIngredient())) {
@@ -30,7 +28,6 @@ public class IngredientController {
     }
 
     @GetMapping("/{id}")
-
     public Ingredient getIngredient(@PathVariable("id") Integer id) {
         return ingredientService.getIngredient(id);
     }

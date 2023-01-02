@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +14,6 @@ public class IngredientService {
     private final FileService fileService;
     private Map<Integer, Ingredient> ingredients = new HashMap<>();
     private Integer id = 0;
-
     public IngredientService(FileService fileService) {
         this.fileService = fileService;
     }

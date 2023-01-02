@@ -32,7 +32,6 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-
     public Recipe getRecipe(@PathVariable("id") Integer id) {
         return recipeService.getRecipe(id);
     }
