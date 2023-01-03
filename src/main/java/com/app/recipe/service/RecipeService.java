@@ -1,68 +1,17 @@
 package com.app.recipe.service;
 
 import com.app.recipe.model.Recipe;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
 
-@org.springframework.stereotype.Service
+public interface RecipeService {
+    Recipe addRecipe(Recipe recipe);
 
-public class RecipeService {
-    private final FileService fileService;
-    private Map<Integer, Recipe> recipeMap = new HashMap<>();
-    public Integer id = 0;
-    public RecipeService(FileService fileService) {
-        this.fileService = fileService;
-    }
+    Recipe getRecipe(Integer id);
 
-    @PostConstruct
-    private void init() {
-        readFromFile();
-    }
+    Recipe updateRecipe(Integer id, Recipe recipe);
 
-    public Recipe addRecipe(Recipe recipe) {
-        if (!recipeMap.containsValue(recipe)) {
-            recipeMap.put(id++, recipe);
-            saveToFile();
-        }
-        return recipe;
-    }
+    void deleteRecipe(Integer id);
 
-    public Recipe getRecipe(Integer id) {
-        return recipeMap.get(id);
-    }
+    void saveToFile();
 
-    public Recipe updateRecipe(Integer id, Recipe recipe) {
-        if (recipeMap.containsKey(id)) {
-            recipeMap.replace(id, recipe);
-            saveToFile();
-        }
-        return recipe;
-    }
-
-    public void deleteRecipe(Integer id) {
-        recipeMap.remove(id);
-    }
-
-    private void saveToFile() {
-        try {
-            String json = new ObjectMapper().writeValueAsString(recipeMap);
-            fileService.saveToRecipeFile(json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readFromFile() {
-        try {
-            String json = fileService.readFromRecipeFile();
-            recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
-            });
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
+    void readFromFile();
 }

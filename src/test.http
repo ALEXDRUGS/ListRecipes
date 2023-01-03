@@ -2,11 +2,11 @@ PUT http://localhost:8080/recipe/0
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/files/import/recipe
+GET http://localhost:8080/recipe/0
 Content-Type: application/json
 
 ###
-PUT http://localhost:8080/ingredients/0
+POST http://localhost:8080/files/import/ingredients
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 {
   "nameIngredient": "Специи",
-  "count": 1,
+  "count": 2,
   "measureUnit": "щепотка"
 }
 
@@ -32,7 +32,7 @@ Content-Type: application/json
 GET http://localhost:8080/recipe/3
 
 ###
-POST http://localhost:8080/recipe
+POST http://localhost:8080/files/import/recipe
 Content-Type: application/json
 
 {
