@@ -28,6 +28,7 @@ public class FileServiceImpl implements FileService {
             Files.writeString(Path.of(recipeFilePath, recipeFileName), json);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
     @Override
@@ -37,6 +38,7 @@ public class FileServiceImpl implements FileService {
             Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
     @Override
@@ -54,7 +56,7 @@ public class FileServiceImpl implements FileService {
             return Files.readString(Path.of(ingredientFilePath, ingredientFileName));
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException("Something wrong");
         }
     }
     @Override
@@ -64,6 +66,7 @@ public class FileServiceImpl implements FileService {
             Files.createFile(Path.of(recipeFilePath, recipeFileName));
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
     @Override
@@ -73,6 +76,7 @@ public class FileServiceImpl implements FileService {
             Files.createFile(Path.of(ingredientFilePath, ingredientFileName));
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
     @Override

@@ -53,6 +53,7 @@ public class IngredientServiceImpl implements IngredientService {
             fileServiceImpl.saveToIngFile(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
     @Override
@@ -63,6 +64,7 @@ public class IngredientServiceImpl implements IngredientService {
             });
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
 }

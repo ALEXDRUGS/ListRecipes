@@ -61,6 +61,7 @@ public class RecipeServiceImpl implements RecipeService {
             fileServiceImpl.saveToRecipeFile(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
 
@@ -72,6 +73,7 @@ public class RecipeServiceImpl implements RecipeService {
             });
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            throw new RuntimeException("Something wrong");
         }
     }
 }

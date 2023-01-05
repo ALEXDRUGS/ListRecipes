@@ -32,7 +32,7 @@ Content-Type: application/json
 GET http://localhost:8080/recipe/3
 
 ###
-POST http://localhost:8080/files/import/recipe
+POST http://localhost:8080/recipe
 Content-Type: application/json
 
 {
