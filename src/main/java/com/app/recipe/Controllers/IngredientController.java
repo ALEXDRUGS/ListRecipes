@@ -1,7 +1,7 @@
 package com.app.recipe.controllers;
 
 import com.app.recipe.model.Ingredient;
-import com.app.recipe.service.impl.IngredientServiceImpl;
+import com.app.recipe.service.IngredientService;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/ingredients")
 public class IngredientController {
-    private final IngredientServiceImpl ingredientServiceImpl;
+    private final IngredientService ingredientService;
 
-    public IngredientController(IngredientServiceImpl ingredientServiceImpl) {
-        this.ingredientServiceImpl = ingredientServiceImpl;
+    public IngredientController(IngredientService ingredientService) {
+        this.ingredientService = ingredientService;
     }
 
     @PostMapping
@@ -22,23 +22,23 @@ public class IngredientController {
         if (StringUtils.isBlank(ingredient.getNameIngredient())) {
             result = ResponseEntity.badRequest().build();
         } else {
-            result = ResponseEntity.ok(ingredientServiceImpl.addIngredient(ingredient));
+            result = ResponseEntity.ok(ingredientService.addIngredient(ingredient));
         }
         return result;
     }
 
     @GetMapping("/{id}")
     public Ingredient getIngredient(@PathVariable("id") Integer id) {
-        return ingredientServiceImpl.getIngredient(id);
+        return ingredientService.getIngredient(id);
     }
 
     @PutMapping("/{id}")
     public Ingredient updateIngredient(@PathVariable Integer id, @RequestBody Ingredient ingredient) {
-        return ingredientServiceImpl.updateIngredient(id, ingredient);
+        return ingredientService.updateIngredient(id, ingredient);
     }
 
     @DeleteMapping("/{id}")
     public void deleteIngredient(@PathVariable("id") Integer id) {
-        ingredientServiceImpl.deleteIngredient(id);
+        ingredientService.deleteIngredient(id);
     }
 }
