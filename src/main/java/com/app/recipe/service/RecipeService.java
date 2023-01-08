@@ -2,6 +2,9 @@ package com.app.recipe.service;
 
 import com.app.recipe.model.Recipe;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
 public interface RecipeService {
     Recipe addRecipe(Recipe recipe);
 
@@ -14,4 +17,6 @@ public interface RecipeService {
     void saveToFile();
 
     void readFromFile();
+
+    Path createAllRecipesFile() throws IOException;
 }

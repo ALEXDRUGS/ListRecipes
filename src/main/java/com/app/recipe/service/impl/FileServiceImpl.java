@@ -22,6 +22,15 @@ public class FileServiceImpl implements FileService {
     private String ingredientFileName;
 
     @Override
+    public Path createAllRecipesFile(String suffix) {
+        try {
+            return Files.createFile(Path.of(recipeFilePath, suffix));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public void saveToRecipeFile(String json) {
         try {
             cleanRecipeDataFile();
@@ -31,6 +40,7 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException("Something wrong");
         }
     }
+
     @Override
     public void saveToIngFile(String json) {
         try {
@@ -41,6 +51,7 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException("Something wrong");
         }
     }
+
     @Override
     public String readFromRecipeFile() {
         try {
@@ -50,6 +61,7 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException();
         }
     }
+
     @Override
     public String readFromIngFile() {
         try {
@@ -59,6 +71,7 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException("Something wrong");
         }
     }
+
     @Override
     public void cleanRecipeDataFile() {
         try {
@@ -69,6 +82,7 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException("Something wrong");
         }
     }
+
     @Override
     public void cleanIngDataFile() {
         try {
@@ -79,10 +93,12 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException("Something wrong");
         }
     }
+
     @Override
     public File getRecipeDataFile() {
         return new File(recipeFilePath + "/" + recipeFileName);
     }
+
     @Override
     public File getIngDataFile() {
         return new File(ingredientFilePath + "/" + ingredientFileName);

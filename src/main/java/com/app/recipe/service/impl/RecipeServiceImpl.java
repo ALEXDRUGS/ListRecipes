@@ -7,6 +7,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,5 +80,28 @@ public class RecipeServiceImpl implements RecipeService {
             e.printStackTrace();
             throw new RuntimeException("Something wrong");
         }
+    }
+
+    @Override
+    public Path createAllRecipesFile() throws IOException {
+        Path path = fileServiceImpl.createAllRecipesFile("allRecipes");
+        for (Recipe recipe : recipeMap.values()) {
+            try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+                writer.append(" Название рецепта: ");
+                writer.append(recipe.getName());
+                writer.append("\n");
+                writer.append("Время приготовления: ");
+                writer.append(String.valueOf(recipe.getPreparingTime()));
+                writer.append(" ");
+                writer.append(recipe.getMeasureUnit());
+                writer.append("\n");
+                writer.append("Ингредиенты: ");
+                writer.append(String.valueOf(recipe.getIngredients()));
+                writer.append("\n");
+                writer.append("Шаги приготовления: ");
+                writer.append(String.valueOf(recipe.getSteps()));
+            }
+        }
+        return path;
     }
 }
