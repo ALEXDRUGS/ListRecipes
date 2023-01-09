@@ -6,17 +6,17 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public interface RecipeService {
-    Recipe addRecipe(Recipe recipe);
+    Recipe addRecipe(Recipe recipe) throws IOException;
 
     Recipe getRecipe(Integer id);
 
-    Recipe updateRecipe(Integer id, Recipe recipe);
+    Recipe updateRecipe(Integer id, Recipe recipe) throws IOException;
 
     void deleteRecipe(Integer id);
 
-    void saveToFile();
+    void saveToFile() throws IOException;
 
-    void readFromFile();
+    void readFromFile() throws IOException;
 
     Path createAllRecipesFile() throws IOException;
 }

@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/ingredients")
 public class IngredientController {
@@ -17,7 +19,7 @@ public class IngredientController {
     }
 
     @PostMapping
-    public ResponseEntity<Ingredient> addIngredient(@RequestBody @NotNull Ingredient ingredient) {
+    public ResponseEntity<Ingredient> addIngredient(@RequestBody @NotNull Ingredient ingredient) throws IOException {
         ResponseEntity<Ingredient> result;
         if (StringUtils.isBlank(ingredient.getNameIngredient())) {
             result = ResponseEntity.badRequest().build();
@@ -33,7 +35,7 @@ public class IngredientController {
     }
 
     @PutMapping("/{id}")
-    public Ingredient updateIngredient(@PathVariable Integer id, @RequestBody Ingredient ingredient) {
+    public Ingredient updateIngredient(@PathVariable Integer id, @RequestBody Ingredient ingredient) throws IOException {
         return ingredientService.updateIngredient(id, ingredient);
     }
 

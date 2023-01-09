@@ -1,13 +1,15 @@
 package com.app.recipe.service.impl;
 
+import com.app.recipe.exceptions.ReadFromIngFileException;
+import com.app.recipe.exceptions.SaveToIngFileException;
 import com.app.recipe.model.Ingredient;
 import com.app.recipe.service.IngredientService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,11 +23,11 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @PostConstruct
-    public void init() {
+    public void init() throws IOException {
         readFromIngFile();
     }
     @Override
-    public Ingredient addIngredient(Ingredient ingredient) {
+    public Ingredient addIngredient(Ingredient ingredient) throws IOException {
         if (!ingredients.containsValue(ingredient)) {
             ingredients.put(id++, ingredient);
             saveToIngFile();
@@ -37,7 +39,7 @@ public class IngredientServiceImpl implements IngredientService {
         return ingredients.get(id);
     }
     @Override
-    public Ingredient updateIngredient(Integer id, Ingredient ingredient) {
+    public Ingredient updateIngredient(Integer id, Ingredient ingredient) throws IOException {
         ingredients.replace(id, ingredient);
         saveToIngFile();
         return ingredient;
@@ -47,24 +49,22 @@ public class IngredientServiceImpl implements IngredientService {
         ingredients.remove(id);
     }
     @Override
-    public void saveToIngFile() {
+    public void saveToIngFile() throws IOException {
         try {
             String json = new ObjectMapper().writeValueAsString(ingredients);
             fileServiceImpl.saveToIngFile(json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (SaveToIngFileException e) {
+            e.saveToIngFileException();
         }
     }
     @Override
-    public void readFromIngFile() {
+    public void readFromIngFile() throws IOException {
         try {
             String json = fileServiceImpl.readFromIngFile();
             ingredients = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
             });
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (ReadFromIngFileException e) {
+            e.readFromIngFileException();
         }
     }
 }

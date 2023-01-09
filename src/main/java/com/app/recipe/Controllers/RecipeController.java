@@ -1,5 +1,6 @@
 package com.app.recipe.controllers;
 
+import com.app.recipe.exceptions.GetAllRecipesFileException;
 import com.app.recipe.model.Recipe;
 import com.app.recipe.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +29,7 @@ public class RecipeController {
 
     @Operation(description = "Recipe has been added")
     @PostMapping
-    public ResponseEntity<Recipe> addRecipe(@RequestBody @NotNull Recipe recipe) {
+    public ResponseEntity<Recipe> addRecipe(@RequestBody @NotNull Recipe recipe) throws IOException {
         ResponseEntity<Recipe> result;
         if (StringUtils.isBlank(recipe.getName())) {
             result = ResponseEntity.badRequest().build();
@@ -39,7 +40,7 @@ public class RecipeController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Object> getAllRecipesFile() {
+    public ResponseEntity<Object> getAllRecipesFile() throws IOException {
         try {
             Path path = recipeService.createAllRecipesFile();
             if (Files.size(path) == 0) {
@@ -51,8 +52,8 @@ public class RecipeController {
                     .contentLength(Files.size(path))
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\" AllRecipes.txt\"")
                     .body(resource);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (GetAllRecipesFileException e) {
+            e.getAllRecipesFileException();
             return ResponseEntity.internalServerError().body(e.toString());
         }
     }
@@ -63,7 +64,7 @@ public class RecipeController {
     }
 
     @PutMapping("/{id}")
-    public Recipe updateRecipe(@PathVariable("id") Integer id, @RequestBody Recipe recipe) {
+    public Recipe updateRecipe(@PathVariable("id") Integer id, @RequestBody Recipe recipe) throws IOException {
         return recipeService.updateRecipe(id, recipe);
     }
 

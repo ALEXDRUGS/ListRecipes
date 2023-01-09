@@ -1,5 +1,6 @@
 package com.app.recipe.service.impl;
 
+import com.app.recipe.exceptions.*;
 import com.app.recipe.service.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,75 +23,74 @@ public class FileServiceImpl implements FileService {
     private String ingredientFileName;
 
     @Override
-    public Path createAllRecipesFile(String suffix) {
-        try {
-            return Files.createFile(Path.of(recipeFilePath, suffix));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    public Path createAllRecipesFile(String suffix) throws IOException {
+        if (!Files.exists(Path.of(recipeFilePath))) {
+            try {
+                return Files.createFile(Path.of(recipeFilePath, suffix));
+            } catch (CreateAllRecipesFileException e) {
+                e.createAllRecipesFileException();
+            }
         }
+        return null;
     }
 
     @Override
-    public void saveToRecipeFile(String json) {
+    public void saveToRecipeFile(String json) throws IOException {
         try {
             cleanRecipeDataFile();
             Files.writeString(Path.of(recipeFilePath, recipeFileName), json);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (SaveToRecipeFileException e) {
+            e.saveToRecipeFileException();
         }
     }
 
     @Override
-    public void saveToIngFile(String json) {
+    public void saveToIngFile(String json) throws IOException {
         try {
             cleanIngDataFile();
             Files.writeString(Path.of(ingredientFilePath, ingredientFileName), json);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (SaveToIngFileException e) {
+            e.saveToIngFileException();
         }
     }
 
     @Override
-    public String readFromRecipeFile() {
+    public String readFromRecipeFile() throws IOException {
         try {
             return Files.readString(Path.of(recipeFilePath, recipeFileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+        } catch (ReadFromRecipeFileException e) {
+            e.readFromRecipeFileException();
         }
+        return null;
     }
 
     @Override
-    public String readFromIngFile() {
+    public String readFromIngFile() throws IOException {
         try {
             return Files.readString(Path.of(ingredientFilePath, ingredientFileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (ReadFromIngFileException e) {
+            e.readFromIngFileException();
         }
+        return null;
     }
 
     @Override
-    public void cleanRecipeDataFile() {
+    public void cleanRecipeDataFile() throws IOException {
         try {
             Files.deleteIfExists(Path.of(recipeFilePath, recipeFileName));
             Files.createFile(Path.of(recipeFilePath, recipeFileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (CleanRecipeDataFileException e) {
+            e.cleanRecipeDataFileException();
         }
     }
 
     @Override
-    public void cleanIngDataFile() {
+    public void cleanIngDataFile() throws IOException {
         try {
             Files.deleteIfExists(Path.of(ingredientFilePath, ingredientFileName));
             Files.createFile(Path.of(ingredientFilePath, ingredientFileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (CleanIngDataFileException e) {
+            e.cleanIngDataFileException();
         }
     }
 
@@ -102,5 +102,8 @@ public class FileServiceImpl implements FileService {
     @Override
     public File getIngDataFile() {
         return new File(ingredientFilePath + "/" + ingredientFileName);
+    }
+
+    public void deleteRecipe(Integer id) {
     }
 }

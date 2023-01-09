@@ -1,5 +1,7 @@
 package com.app.recipe.controllers;
 
+import com.app.recipe.exceptions.ImportIngredientException;
+import com.app.recipe.exceptions.ImportRecipeException;
 import com.app.recipe.service.FileService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.InputStreamResource;
@@ -52,27 +54,27 @@ public class FileController {
     }
 
     @PostMapping(value = "/import/recipe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> uploadRecipeDataFile(@RequestParam MultipartFile multipartFile) {
+    public ResponseEntity<Void> uploadRecipeDataFile(@RequestParam MultipartFile multipartFile) throws IOException {
         fileService.cleanRecipeDataFile();
         File file = fileService.getRecipeDataFile();
         try (FileOutputStream fos = new FileOutputStream(file)){
             IOUtils.copy(multipartFile.getInputStream(), fos);
             return ResponseEntity.ok().build();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (ImportRecipeException e) {
+            e.importRecipeException();
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @PostMapping(value = "/import/ingredients", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Void> uploadIngDataFile(@RequestParam MultipartFile multipartFile) {
+    public ResponseEntity<Void> uploadIngDataFile(@RequestParam MultipartFile multipartFile) throws IOException {
         fileService.cleanIngDataFile();
         File file = fileService.getIngDataFile();
         try (FileOutputStream fos = new FileOutputStream(file)){
             IOUtils.copy(multipartFile.getInputStream(), fos);
             return ResponseEntity.ok().build();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (ImportIngredientException e) {
+            e.importIngredientException();
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }

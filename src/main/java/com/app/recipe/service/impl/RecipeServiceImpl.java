@@ -1,8 +1,9 @@
 package com.app.recipe.service.impl;
 
+import com.app.recipe.exceptions.ReadFromRecipeFileException;
+import com.app.recipe.exceptions.SaveToRecipeFileException;
 import com.app.recipe.model.Recipe;
 import com.app.recipe.service.RecipeService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,12 +28,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @PostConstruct
-    private void init() {
+    private void init() throws IOException {
         readFromFile();
     }
 
     @Override
-    public Recipe addRecipe(Recipe recipe) {
+    public Recipe addRecipe(Recipe recipe) throws IOException {
         if (!recipeMap.containsValue(recipe)) {
             recipeMap.put(id++, recipe);
             saveToFile();
@@ -46,7 +47,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe updateRecipe(Integer id, Recipe recipe) {
+    public Recipe updateRecipe(Integer id, Recipe recipe) throws IOException {
         if (recipeMap.containsKey(id)) {
             recipeMap.replace(id, recipe);
             saveToFile();
@@ -57,28 +58,27 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void deleteRecipe(Integer id) {
         recipeMap.remove(id);
+        fileServiceImpl.deleteRecipe(id);
     }
 
     @Override
-    public void saveToFile() {
+    public void saveToFile() throws IOException {
         try {
             String json = new ObjectMapper().writeValueAsString(recipeMap);
             fileServiceImpl.saveToRecipeFile(json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (SaveToRecipeFileException e) {
+            e.saveToRecipeFileException();
         }
     }
 
     @Override
-    public void readFromFile() {
+    public void readFromFile() throws IOException {
         try {
             String json = fileServiceImpl.readFromRecipeFile();
             recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
             });
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Something wrong");
+        } catch (ReadFromRecipeFileException e) {
+            e.readFromRecipeFileException();
         }
     }
 
