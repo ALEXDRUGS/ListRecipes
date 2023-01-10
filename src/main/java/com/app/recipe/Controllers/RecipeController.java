@@ -1,12 +1,21 @@
 package com.app.recipe.controllers;
 
+import com.app.recipe.exceptions.GetAllRecipesFileException;
 import com.app.recipe.model.Recipe;
 import com.app.recipe.service.RecipeService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @RestController
 @RequestMapping("/recipe")
@@ -18,10 +27,9 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @Operation(description = "Recipe not has been added")
+    @Operation(description = "Recipe has been added")
     @PostMapping
-
-    public ResponseEntity<Recipe> addRecipe(@RequestBody @NotNull Recipe recipe) {
+    public ResponseEntity<Recipe> addRecipe(@RequestBody @NotNull Recipe recipe) throws IOException {
         ResponseEntity<Recipe> result;
         if (StringUtils.isBlank(recipe.getName())) {
             result = ResponseEntity.badRequest().build();
@@ -31,14 +39,32 @@ public class RecipeController {
         return result;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/all")
+    public ResponseEntity<Object> getAllRecipesFile() throws IOException {
+        try {
+            Path path = recipeService.createAllRecipesFile();
+            if (Files.size(path) == 0) {
+                return ResponseEntity.noContent().build();
+            }
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(path.toFile()));
+            return ResponseEntity.ok()
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .contentLength(Files.size(path))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\" AllRecipes.txt\"")
+                    .body(resource);
+        } catch (GetAllRecipesFileException e) {
+            e.getAllRecipesFileException();
+            return ResponseEntity.internalServerError().body(e.toString());
+        }
+    }
 
+    @GetMapping("/{id}")
     public Recipe getRecipe(@PathVariable("id") Integer id) {
         return recipeService.getRecipe(id);
     }
 
     @PutMapping("/{id}")
-    public Recipe updateRecipe(@PathVariable("id") Integer id, @RequestBody Recipe recipe) {
+    public Recipe updateRecipe(@PathVariable("id") Integer id, @RequestBody Recipe recipe) throws IOException {
         return recipeService.updateRecipe(id, recipe);
     }
 

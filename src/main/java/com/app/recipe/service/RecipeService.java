@@ -2,32 +2,21 @@ package com.app.recipe.service;
 
 import com.app.recipe.model.Recipe;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.io.IOException;
+import java.nio.file.Path;
 
-@org.springframework.stereotype.Service
+public interface RecipeService {
+    Recipe addRecipe(Recipe recipe) throws IOException;
 
-public class RecipeService {
-    private final Map<Integer, Recipe> recipeMap = new TreeMap<>();
-    public Integer id = 0;
+    Recipe getRecipe(Integer id);
 
-    public Recipe addRecipe(Recipe recipe) {
-        recipeMap.put(id++, recipe);
-        return recipe;
-    }
+    Recipe updateRecipe(Integer id, Recipe recipe) throws IOException;
 
-    public Recipe getRecipe(Integer id) {
-        return recipeMap.get(id);
-    }
+    void deleteRecipe(Integer id);
 
-    public Recipe updateRecipe(Integer id, Recipe recipe) {
-        if (recipeMap.containsKey(id)) {
-            recipeMap.replace(id, recipe);
-        }
-        return recipe;
-    }
+    void saveToFile() throws IOException;
 
-    public void deleteRecipe(Integer id) {
-        recipeMap.remove(id);
-    }
+    void readFromFile() throws IOException;
+
+    Path createAllRecipesFile() throws IOException;
 }

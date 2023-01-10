@@ -1,30 +1,19 @@
 package com.app.recipe.service;
 
 import com.app.recipe.model.Ingredient;
-import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.io.IOException;
 
-@Service
-public class IngredientService {
-    private final Map<Integer, Ingredient> ingredients = new TreeMap<>();
-    private Integer id = 0;
+public interface IngredientService {
+    Ingredient addIngredient(Ingredient ingredient) throws IOException;
 
-    public Ingredient addIngredient(Ingredient ingredient) {
-        ingredients.put(id++, ingredient);
-        return ingredient;
-    }
+    Ingredient getIngredient(Integer id);
 
-    public Ingredient getIngredient(Integer id) {
-        return ingredients.get(id);
-    }
+    Ingredient updateIngredient(Integer id, Ingredient ingredient) throws IOException;
 
-    public Ingredient updateIngredient(Integer id, Ingredient ingredient) {
-        ingredients.replace(id, ingredient);
-        return ingredient;
-    }
+    void deleteIngredient(Integer id);
 
-    public void deleteIngredient(Integer id) {
-        ingredients.remove(id);
-    }
+    void saveToIngFile() throws IOException;
+
+    void readFromIngFile() throws IOException;
 }
