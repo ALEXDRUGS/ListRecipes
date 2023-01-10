@@ -89,7 +89,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Path createAllRecipesFile() throws IOException {
-        Path path = fileServiceImpl.createAllRecipesFile("allRecipes");
+        Path path = fileServiceImpl.createAllRecipesFile("createRecipes");
         for (Recipe recipe : recipeMap.values()) {
             try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                 writer.append(" Название рецепта: ");
