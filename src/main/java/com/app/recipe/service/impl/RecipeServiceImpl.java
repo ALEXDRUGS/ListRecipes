@@ -56,9 +56,10 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void deleteRecipe(Integer id) {
+    public void deleteRecipe(Integer id) throws IOException {
         recipeMap.remove(id);
-        fileServiceImpl.deleteRecipe(id);
+        fileServiceImpl.cleanRecipeDataFile();
+        saveToFile();
     }
 
     @Override
@@ -75,8 +76,12 @@ public class RecipeServiceImpl implements RecipeService {
     public void readFromFile() throws IOException {
         try {
             String json = fileServiceImpl.readFromRecipeFile();
-            recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
-            });
+            if (json == null || json.isBlank()) {
+                System.out.println("File is empty");
+            } else {
+                recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
+                });
+            }
         } catch (ReadFromRecipeFileException e) {
             e.readFromRecipeFileException();
         }
