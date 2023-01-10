@@ -2,12 +2,11 @@ package com.app.recipe.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import java.util.LinkedList;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Recipe {
     private String name;
     private Integer preparingTime;
