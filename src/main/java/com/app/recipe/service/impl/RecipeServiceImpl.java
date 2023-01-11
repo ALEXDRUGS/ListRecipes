@@ -77,7 +77,7 @@ public class RecipeServiceImpl implements RecipeService {
         try {
             String json = fileServiceImpl.readFromRecipeFile();
             if (json == null || json.isBlank()) {
-                System.out.println("File is empty");
+                System.out.println("Empty recipes.json file created");
             } else {
                 recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
                 });
@@ -94,16 +94,13 @@ public class RecipeServiceImpl implements RecipeService {
             try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                 writer.append(" Название рецепта: ");
                 writer.append(recipe.getName());
-                writer.append("\n");
-                writer.append(" Время приготовления: ");
+                writer.append("\n Время приготовления: ");
                 writer.append(String.valueOf(recipe.getPreparingTime()));
                 writer.append(" ");
                 writer.append(recipe.getMeasureUnit());
-                writer.append("\n");
-                writer.append(" Ингредиенты: ");
+                writer.append("\n Ингредиенты: ");
                 writer.append(String.valueOf(recipe.getIngredients()));
-                writer.append("\n");
-                writer.append(" Шаги приготовления: ");
+                writer.append("\n Шаги приготовления: ");
                 writer.append(String.valueOf(recipe.getSteps()));
             }
         }
