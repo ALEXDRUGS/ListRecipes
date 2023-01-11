@@ -69,7 +69,7 @@ public class RecipeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRecipe(@PathVariable("id") Integer id) {
+    public void deleteRecipe(@PathVariable("id") Integer id) throws IOException {
         recipeService.deleteRecipe(id);
     }
 }

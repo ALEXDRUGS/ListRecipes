@@ -12,7 +12,7 @@ public interface RecipeService {
 
     Recipe updateRecipe(Integer id, Recipe recipe) throws IOException;
 
-    void deleteRecipe(Integer id);
+    void deleteRecipe(Integer id) throws IOException;
 
     void saveToFile() throws IOException;
 

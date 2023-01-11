@@ -8,8 +8,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.annotation.PostConstruct;
+import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -56,9 +56,10 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void deleteRecipe(Integer id) {
+    public void deleteRecipe(Integer id) throws IOException {
         recipeMap.remove(id);
-        fileServiceImpl.deleteRecipe(id);
+        fileServiceImpl.cleanRecipeDataFile();
+        saveToFile();
     }
 
     @Override
@@ -75,8 +76,12 @@ public class RecipeServiceImpl implements RecipeService {
     public void readFromFile() throws IOException {
         try {
             String json = fileServiceImpl.readFromRecipeFile();
-            recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
-            });
+            if (json == null || json.isBlank()) {
+                System.out.println("Empty recipes.json file created");
+            } else {
+                recipeMap = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
+                });
+            }
         } catch (ReadFromRecipeFileException e) {
             e.readFromRecipeFileException();
         }
@@ -86,19 +91,16 @@ public class RecipeServiceImpl implements RecipeService {
     public Path createAllRecipesFile() throws IOException {
         Path path = fileServiceImpl.createAllRecipesFile("allRecipes");
         for (Recipe recipe : recipeMap.values()) {
-            try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+            try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
                 writer.append(" Название рецепта: ");
                 writer.append(recipe.getName());
-                writer.append("\n");
-                writer.append("Время приготовления: ");
+                writer.append("\n Время приготовления: ");
                 writer.append(String.valueOf(recipe.getPreparingTime()));
                 writer.append(" ");
                 writer.append(recipe.getMeasureUnit());
-                writer.append("\n");
-                writer.append("Ингредиенты: ");
+                writer.append("\n Ингредиенты: ");
                 writer.append(String.valueOf(recipe.getIngredients()));
-                writer.append("\n");
-                writer.append("Шаги приготовления: ");
+                writer.append("\n Шаги приготовления: ");
                 writer.append(String.valueOf(recipe.getSteps()));
             }
         }

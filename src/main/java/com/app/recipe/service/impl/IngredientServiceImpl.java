@@ -18,6 +18,7 @@ public class IngredientServiceImpl implements IngredientService {
     private final FileServiceImpl fileServiceImpl;
     private Map<Integer, Ingredient> ingredients = new HashMap<>();
     private Integer id = 0;
+
     public IngredientServiceImpl(FileServiceImpl fileServiceImpl) {
         this.fileServiceImpl = fileServiceImpl;
     }
@@ -26,6 +27,7 @@ public class IngredientServiceImpl implements IngredientService {
     public void init() throws IOException {
         readFromIngFile();
     }
+
     @Override
     public Ingredient addIngredient(Ingredient ingredient) throws IOException {
         if (!ingredients.containsValue(ingredient)) {
@@ -34,20 +36,24 @@ public class IngredientServiceImpl implements IngredientService {
         }
         return ingredient;
     }
+
     @Override
     public Ingredient getIngredient(Integer id) {
         return ingredients.get(id);
     }
+
     @Override
     public Ingredient updateIngredient(Integer id, Ingredient ingredient) throws IOException {
         ingredients.replace(id, ingredient);
         saveToIngFile();
         return ingredient;
     }
+
     @Override
     public void deleteIngredient(Integer id) {
         ingredients.remove(id);
     }
+
     @Override
     public void saveToIngFile() throws IOException {
         try {
@@ -57,12 +63,17 @@ public class IngredientServiceImpl implements IngredientService {
             e.saveToIngFileException();
         }
     }
+
     @Override
     public void readFromIngFile() throws IOException {
         try {
             String json = fileServiceImpl.readFromIngFile();
-            ingredients = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
-            });
+            if (json == null || json.isBlank()) {
+                System.out.println("Empty ingredients.json file created");
+            } else {
+                ingredients = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Ingredient>>() {
+                });
+            }
         } catch (ReadFromIngFileException e) {
             e.readFromIngFileException();
         }

@@ -17,9 +17,9 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return "Рецепт: " + name + ", время приготовления: " + preparingTime +
-                " " + measureUnit +
-                ", Ингредиенты: " + ingredients +
+        return "Рецепт: " + name + "\n" + " Время приготовления: " + preparingTime +
+                " " + measureUnit + "\n" +
+                " Ингредиенты: " + ingredients + "\n" +
                 ". Способ приготовления: " + steps;
     }
 }

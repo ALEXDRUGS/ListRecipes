@@ -15,7 +15,7 @@ public class Ingredient {
     @Override
     public String toString() {
         return " ингредиент: " + nameIngredient +
-                ", количество: " + count +
+                " количество: " + count +
                 " " + measureUnit;
     }
 }
