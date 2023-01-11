@@ -24,14 +24,12 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public Path createAllRecipesFile(String suffix) throws IOException {
-        if (!Files.exists(Path.of(recipeFilePath))) {
-            try {
-                return Files.createFile(Path.of(recipeFilePath, suffix));
-            } catch (CreateAllRecipesFileException e) {
-                e.createAllRecipesFileException();
-            }
+        if (Files.exists(Path.of(recipeFilePath, suffix))) {
+            Files.delete(Path.of(recipeFilePath, suffix));
+            Files.createFile(Path.of(recipeFilePath, suffix));
+            return Path.of(recipeFilePath, suffix);
         }
-        return Path.of(recipeFilePath, suffix);
+        return Files.createFile(Path.of(recipeFilePath, suffix));
     }
 
     public void createRecipesFile() throws IOException {
