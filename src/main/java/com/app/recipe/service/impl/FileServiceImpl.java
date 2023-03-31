@@ -24,14 +24,20 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public Path createAllRecipesFile(String suffix) throws IOException {
-        if (!Files.exists(Path.of(recipeFilePath))) {
-            try {
-                return Files.createFile(Path.of(recipeFilePath, suffix));
-            } catch (CreateAllRecipesFileException e) {
-                e.createAllRecipesFileException();
-            }
+        if (Files.exists(Path.of(recipeFilePath, suffix))) {
+            Files.delete(Path.of(recipeFilePath, suffix));
+            Files.createFile(Path.of(recipeFilePath, suffix));
+            return Path.of(recipeFilePath, suffix);
         }
-        return null;
+        return Files.createFile(Path.of(recipeFilePath, suffix));
+    }
+
+    public void createRecipesFile() throws IOException {
+        Files.createFile(Path.of(recipeFilePath, recipeFileName));
+    }
+
+    private void createIngFile() throws IOException {
+        Files.createFile(Path.of(ingredientFilePath, ingredientFileName));
     }
 
     @Override
@@ -56,22 +62,26 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public String readFromRecipeFile() throws IOException {
-        try {
-            return Files.readString(Path.of(recipeFilePath, recipeFileName));
-        } catch (ReadFromRecipeFileException e) {
-            e.readFromRecipeFileException();
-        }
-        return null;
+        if (Files.exists(Path.of(recipeFilePath, recipeFileName))) {
+            try {
+                return Files.readString(Path.of(recipeFilePath, recipeFileName));
+            } catch (ReadFromRecipeFileException e) {
+                e.readFromRecipeFileException();
+            }
+        } else createRecipesFile();
+        return Files.readString(Path.of(recipeFilePath, recipeFileName));
     }
 
     @Override
     public String readFromIngFile() throws IOException {
-        try {
-            return Files.readString(Path.of(ingredientFilePath, ingredientFileName));
-        } catch (ReadFromIngFileException e) {
-            e.readFromIngFileException();
-        }
-        return null;
+        if (Files.exists(Path.of(ingredientFilePath, ingredientFileName))) {
+            try {
+                return Files.readString(Path.of(ingredientFilePath, ingredientFileName));
+            } catch (ReadFromIngFileException e) {
+                e.readFromIngFileException();
+            }
+        } else createIngFile();
+        return Files.readString(Path.of(ingredientFilePath, ingredientFileName));
     }
 
     @Override
@@ -102,8 +112,5 @@ public class FileServiceImpl implements FileService {
     @Override
     public File getIngDataFile() {
         return new File(ingredientFilePath + "/" + ingredientFileName);
-    }
-
-    public void deleteRecipe(Integer id) {
     }
 }
